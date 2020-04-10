@@ -71,6 +71,7 @@ public class SaisieRPN {
         switch( choice ) {
           case "quit":
             System.out.println( "You have leave the calculator" );
+            System.out.println( "You have leave the calculator2" );
             System.exit(0);
         }
       }
