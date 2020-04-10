@@ -53,4 +53,27 @@ public class SaisieRPN {
     // Output:
     //    0.0
   }
+
+  public void saisie2() {
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Wellcome to the new high calculator !\n"
+      +"Give me a number or a operator an i calculate for you\n");
+
+    while( true ) {
+
+      if( sc.hasNextDouble() )
+        motor.save( sc.nextDouble() );
+
+      //
+      else{
+        String choice = sc.nextLine();
+
+        switch( choice ) {
+          case "quit":
+            System.out.println( "You have leave the calculator" );
+            System.exit(0);
+        }
+      }
+    }
+  }
 }

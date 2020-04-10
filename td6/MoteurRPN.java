@@ -1,7 +1,6 @@
 /**
   * Class MoteurRPN
   *
-  *
   */
 
 public class MoteurRPN {

@@ -8,11 +8,13 @@ import java.util.*;
 public class StackDouble {
 
   // Attributs
+  private int sizeMax;
   private Stack<Double> stack;
   private int length;
 
   // Builder
   public StackDouble() {
+    this.sizeMax = 100;
     this.stack = new Stack<Double>();
     this.length = 0;
   }
@@ -38,10 +40,16 @@ public class StackDouble {
   /**
     * Empiler un elem dans la pile
     * @param elem   la valeur a empiler
+    * @return       la taille de la pile en succes, -1 sinon
     */
-  public void pushDouble(Double elem) {
-    this.stack.push(elem);
-    this.length += 1;
+  public int pushDouble(Double elem) {
+    if( this.length < this.sizeMax ) {
+      this.stack.push(elem);
+      this.length += 1;
+      return length;
+    }
+    else
+      return -1;
   }
 
   /**
