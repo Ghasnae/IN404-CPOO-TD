@@ -56,8 +56,8 @@ public class SaisieRPN {
 
   public void saisie2() {
     Scanner sc = new Scanner(System.in);
-    System.out.println("Wellcome to the new high calculator !\n"
-      +"Give me a number or a operator an i calculate for you\n");
+    System.out.println("Welcome to the new high calculator!\n"
+      +"Give me a number or an operator an I calculate for you\n");
 
     while( true ) {
 
@@ -68,11 +68,31 @@ public class SaisieRPN {
       else{
         String choice = sc.nextLine();
 
+        //
         switch( choice ) {
-          case "quit":
-            System.out.println( "You have leave the calculator" );
-            System.out.println( "You have leave the calculator2" );
+          case "exit":
+            System.out.println( "You have left the calculator" );
             System.exit(0);
+
+          //
+          case "+":
+            System.out.println( "res = "+motor.treatment( Operation.PLUS ) );
+            break;
+
+          //
+          case "-":
+            System.out.println( "res = "+motor.treatment( Operation.MOINS ) );
+            break;
+
+          //
+          case "*":
+            System.out.println( "res = "+motor.treatment( Operation.MULT ) );
+            break;
+
+          //
+          case "/":
+            System.out.println( "res = "+motor.treatment( Operation.DIV ) );
+            break;
         }
       }
     }
