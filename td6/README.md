@@ -1,7 +1,24 @@
-@author LE DENMAT Mickael TD4 21804355
+# td6 => Exception(s) and error(s) managment
+Backup directory
 
-This archive contains:
-  A README:    That you are reading.
-  A Makefile:  For execute and compile, for compile tape "make" in the terminal
-  A Main.java, SaisieRPN.java, MoteurRPN.java, Operation.java, StackDouble.java: with javadoc for all functions
-  For see all test, open SaisieRPN.java
+# Description
+The objectif of this exercice is build a calculatorRPN (Reverse Polish Natation)
+
+## Contains
+- Main.java
+- SaisieRPN.java
+- MoteurRPN.java
+- Operation.java
+- StackDouble.java
+
+- README.md
+- Makefile
+
+## Compile/Execute
+For execute and compile, you have to type "make" in your terminal
+
+# Author
+m27bay
+
+## Last Update
+04/13/2020
