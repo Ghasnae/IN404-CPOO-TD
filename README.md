@@ -5,7 +5,7 @@ Backup directory
 You can find here all the tds I have done
 
 ## Contains
-- td1 => Descovery of BlueJ
+- td1 => Discovery of BlueJ
 - td3 => Object and class
 - td4 => Heritage and polymorphism
 - td5 => Module and library
