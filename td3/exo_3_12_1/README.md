@@ -3,6 +3,7 @@ backup directory
 
 # Description
 First class manipulation, builder, getter, setter discovery
+String Class manipulation: crypted string creation/ decrypted string
 
 ## Contains
 - Main.java
