@@ -31,7 +31,7 @@ You can tape a ip address for know his machine name or vise versa, or you can ta
 ```
 For know all machine in this 'domain' or just : 
 ```Java
-> ls' 'domain'
+> ls 'domain'
 ```
 For know all ip address in this domain or :
 ```Java
