@@ -8,6 +8,9 @@ Collection manipulation like Map, List, arrayList, LinkedList, ...
  - dataFile.cfg => config file
  - README.md
  - src/DNS.java => with all functions
+ 
+## Usage
+After the '>' you can tape a ip address for know his machine name or vise versa, or you can tape 'ls -a' follows with a domain for know all machine in this domain "or just 'ls domain' for know all ip address in this domain.
 
 # Author
 Mickael Le Denmat
