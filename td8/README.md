@@ -5,12 +5,33 @@ backup directory
 Collection manipulation like Map, List, arrayList, LinkedList, ...
 
 ## Contains
- - dataFile.cfg => config file
+ - dataFile.cfg => configuration file
  - README.md
  - src/DNS.java => with all functions
  
 ## Usage
-After the '>' you can tape a ip address for know his machine name or vise versa, or you can tape 'ls -a' follows with a domain for know all machine in this domain "or just 'ls' follows with a domain for know all ip address in this domain or 'Exit' for exit.
+You can fill the configuration file with IP address and his machine name like :
+```Bash
+123.456.78.9 monServeur.chezMoi.fr
+```
+With ths config file, program finds for you information.
+After the
+```Jave
+'>'
+```
+You can tape a ip address for know his machine name or vise versa, or you can tape :
+```Java
+> ls -a 'domain'
+```
+For know all machine in this 'domain' or just : 
+```Java
+> ls' 'domain'
+```
+For know all ip address in this domain or :
+```Java
+> Exit
+```
+For exit.
 
 # Author
 Mickael Le Denmat
