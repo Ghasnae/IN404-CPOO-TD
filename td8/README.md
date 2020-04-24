@@ -23,17 +23,33 @@ You can fill the configuration file with IP address and his machine name like :
 With ths config file, program finds for you information.
 After the
 ```Jave
-'>'
+>
 ```
-You can tape a ip address for know his machine name or vise versa, or you can tape :
+You can tape a ip address for know his machine name like :
+```Java
+> 123.456.78.9 // Entry
+monServeur.chezMoi.fr // Output
+```
+
+Or vise versa like :
+```Java
+> monServeur.chezMoi.fr // Entry
+123.456.78.9 // Output
+```
+
+You can tape :
 ```Java
 > ls 'domain'
 ```
-For know all machine in this 'domain' or just : 
+For know all machine in this 'domain'.
+
+Or : 
 ```Java
 > ls -a 'domain'
 ```
-For know all ip address in this domain or :
+For know all ip address in this domain
+
+Fanally, you can tape :
 ```Java
 > Exit
 ```
