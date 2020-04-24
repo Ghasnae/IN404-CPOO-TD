@@ -8,7 +8,13 @@ Collection manipulation like Map, List, arrayList, LinkedList, ...
  - dataFile.cfg => configuration file
  - README.md
  - src/DNS.java => with all functions
- 
+
+## Compilation
+```Bash
+javac DNS.java
+java DNS
+```
+
 ## Usage
 You can fill the configuration file with IP address and his machine name like :
 ```Bash
