@@ -1,12 +1,14 @@
 
 // For read the file
 
+import javax.management.ObjectName;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
 // Exception
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.lang.NumberFormatException;
 
 //
 import java.util.*;
@@ -44,7 +46,7 @@ public class DNS {
 		public AdresseIP( int reseau )
 		{
 			// test : 0 <= reseau <= 255 ?
-			if( check( reseau ) )
+			if( checkReseau( reseau ) )
 				this.reseau = reseau;
 			else
 				this.reseau = -1;
@@ -61,20 +63,45 @@ public class DNS {
 		public AdresseIP( int reseau, int mask, int mask2, int id )
 		{
 			// test : 0 <= all param <= 255
-			if( !check( reseau, mask, mask2, id ) )
+			if( !checkReseau( reseau ) )
 			{
-				// this() must be first statement in constructor body
+				System.out.println( "Error '"+reseau+"' wrong format, value switch to '-1'" );
 				this.reseau = -1;
-				this.mask = -1;
-				this.mask2 = -1;
-				this.id = -1;
+			}
+			else
+			{
+				this.reseau = reseau;
 			}
 			
-			//
-			this.reseau = reseau;
-			this.mask = mask;
-			this.mask2 = mask2;
-			this.id = id;
+			if( !checkMask( mask ) )
+			{
+				System.out.println( "Error '"+mask+"' wrong format, value switch to '-1'" );
+				this.mask = -1;
+			}
+			else
+			{
+				this.mask = mask;
+			}
+			
+			if( !checkMask2( mask2 ) )
+			{
+				System.out.println( "Error '"+mask2+"' wrong format, value switch to '-1'" );
+				this.mask2 = -1;
+			}
+			else
+			{
+				this.mask2 = mask2;
+			}
+			
+			if( !checkId( id ) )
+			{
+				System.out.println( "Error '"+id+"' wrong format, value switch to '-1'" );
+				this.id = -1;
+			}
+			else
+			{
+				this.id = id;
+			}
 		}
 		
 		/**
@@ -84,27 +111,45 @@ public class DNS {
 		 *
 		 * @return true/false
 		 */
-		private boolean check( int reseau )
+		private boolean checkReseau( int reseau )
 		{
 			return reseau <= 255 & reseau >= 0;
 		}
 		
 		/**
-		 * Check numbers
+		 * Check number
 		 *
-		 * @param reseau
 		 * @param mask
+		 *
+		 * @return true/false
+		 */
+		private boolean checkMask( int mask )
+		{
+			return mask <= 255 & mask >= 0;
+		}
+		
+		/**
+		 * Check number
+		 *
 		 * @param mask2
+		 *
+		 * @return true/false
+		 */
+		private boolean checkMask2( int mask2 )
+		{
+			return mask2 <= 255 & mask2 >= 0;
+		}
+		
+		/**
+		 * Check number
+		 *
 		 * @param id
 		 *
 		 * @return true/false
 		 */
-		private boolean check( int reseau, int mask, int mask2, int id )
+		private boolean checkId( int id )
 		{
-			return check( reseau )
-					& mask >= 0 & mask <= 255
-					& mask2 >= 0 & mask2 <= 255
-					& id >= 0 & id <= 255;
+			return id <= 255 & id >= 0;
 		}
 		
 		/**
@@ -226,8 +271,8 @@ public class DNS {
 		public NomMachine()
 		{
 			this.machine = "unknown";
-			this.domain = "unknown";
-			this.local = "unknown";
+			this.domain  = "unknown";
+			this.local   = "unknown";
 		}
 		
 		/**
@@ -469,9 +514,20 @@ public class DNS {
 				AdresseIP IpRead = splitAddressIp( line );
 				NomMachine MachineRead = splitDomainName( line );
 				
-				this.IpToNomMachine.put( IpRead, MachineRead );
-				this.NomMachineToIp.put( MachineRead, IpRead );
-				countDataMax++;
+				if( IpRead.getReseau() != -1 &&
+						IpRead.getMask() != -1 &&
+						IpRead.getMask2() != -1 &&
+						IpRead.getId() != -1)
+				{
+					this.IpToNomMachine.put( IpRead, MachineRead );
+					this.NomMachineToIp.put( MachineRead, IpRead );
+					countDataMax++;
+				}
+				else
+				{
+					System.out.println( "Error wrong format in configuration file, don't add in the data base " +
+							IpRead.toString() + " => " + MachineRead.toString() );
+				}
 			}
 			
 			// Close and exit
@@ -487,25 +543,39 @@ public class DNS {
 		{
 			// Init variables
 			int pos = 0;
+			String reseau2, mask3, mask4, id2;
 			int reseau = 0, mask = 0, mask2 = 0, id = 0;
 			
 			// Found first number
 			pos = line.indexOf( "." );
-			reseau = Integer.parseInt( line.substring( 0, pos ) );
+			reseau2 =  line.substring( 0, pos );
 			line = line.substring( pos + 1, line.length() );
 			
 			// Found second number
 			pos = line.indexOf( "." );
-			mask = Integer.parseInt( line.substring( 0, pos ) );
+			mask3 = line.substring( 0, pos );
 			line = line.substring( pos + 1, line.length() );
 			
 			// Found third number
 			pos = line.indexOf( "." );
-			mask2 = Integer.parseInt( line.substring( 0, pos ) );
+			mask4 = line.substring( 0, pos );
 			
 			// Found last number
-			id = Integer.parseInt( line.substring( pos + 1, line.length() ) );
+			id2 = line.substring( pos + 1, line.length() );
 			
+			try
+			{
+				reseau = Integer.parseInt( reseau2 );
+				mask   = Integer.parseInt( mask3 );
+				mask2  = Integer.parseInt( mask4 );
+				id     = Integer.parseInt( id2 );
+			}
+			catch( NumberFormatException exception )
+			{
+				System.out.println("Error number format");
+				return new AdresseIP();
+			}
+			 
 			// Return
 			return new AdresseIP( reseau, mask, mask2, id );
 		}
@@ -622,24 +692,18 @@ public class DNS {
 		 */
 		public Collection < DnsItem > getItems( String domainExpected )
 		{
-			ArrayList < DnsItem > found = new ArrayList < DnsItem >( this.countDataMax );
-			
-			Collection < NomMachine > convert = this.IpToNomMachine.values();
-			
+			// Result
+			List < DnsItem > found = new ArrayList < DnsItem >( this.countDataMax );
+
 			// Course in dataBase
-			for( NomMachine machine : convert )
+			for( Map.Entry<NomMachine, AdresseIP> element : this.NomMachineToIp.entrySet() )
 			{
-				String format = ".";
-				format.concat( domainExpected );
-				format.concat( "." );
-				
-				if( machine.getDomain().contains( format ) )
+				if( element.getKey().getDomain().contains( domainExpected ) )
 				{
-					String domaine = machine.toString();
-					AdresseIP iP = this.NomMachineToIp.get( machine );
+					AdresseIP iP = element.getValue();
 					
 					DnsItem item = new DnsItem();
-					item.setMachine( machine );
+					item.setMachine( element.getKey() );
 					item.setIp( iP );
 					
 					found.add( item );
@@ -838,7 +902,29 @@ public class DNS {
 			}
 			
 			else if( this.cmdExe.equals( "ls" ) )
-				return support.getItems( this.arg ).toString();
+			{
+				Collection<DnsItem> list = support.getItems( this.arg );
+				String res = "";
+				Iterator<DnsItem> it = list.iterator();
+				
+				while( it.hasNext() )
+					res = res.concat( it.next().getMachine().toString().concat( "\n" ) );
+				
+				return res;
+			}
+			
+			else if( this.cmdExe.equals( "ls -a" ) )
+			{
+				Collection<DnsItem> list = support.getItems( this.arg );
+				String res = "";
+				Iterator<DnsItem> it = list.iterator();
+				
+				while( it.hasNext() )
+					res = res.concat( it.next().getIp().toString().concat( "\n" ) );
+					
+				return res;
+			}
+			
 			else
 				return "unknown";
 		}
@@ -892,7 +978,6 @@ public class DNS {
 		public void nextCommand() throws IOException
 		{
 			int countPoint = 0;
-			String tmp = this.arg.substring( 0, 2 );
 			
 			for( int c = 0 ; c < this.arg.length() ; c++ )
 			{
@@ -927,9 +1012,8 @@ public class DNS {
 					{
 						if( !Character.isLetterOrDigit( str.charAt( c ) ) )
 						{
-							System.out.println( "Error: not good format for machine name"
+							System.out.println( "Error: not good format for machine name, is not a letter or digit"
 									+ " => '" + str.charAt( c ) + "'" );
-							System.exit( 1 );
 						}
 					}
 				}
@@ -944,36 +1028,87 @@ public class DNS {
 			// Maybe ip address
 			else if( countPoint == 3 )
 			{
+				String tmp = this.arg;
 				// Split cmd string
 				int read[] = new int[ 4 ]; // Save three substring
-				int pos = 0, pos2 = 0; // Start end stop for cut the substring
-				int count = 0; // Position in read[]
 				
-				// See any char in cmd
-				for( int c = 0 ; c < this.arg.length() ; c++ )
+				// Init variables
+				int pos = 0;
+				String reseau, mask, mask2, id;
+				
+				// Found first number
+				pos = tmp.indexOf( "." );
+				reseau = tmp.substring( 0, pos );
+				tmp = tmp.substring( pos + 1, tmp.length() );
+				
+				// Found second number
+				pos = tmp.indexOf( "." );
+				mask = tmp.substring( 0, pos );
+				tmp = tmp.substring( pos + 1, tmp.length() );
+				
+				// Found third number
+				pos = tmp.indexOf( "." );
+				mask2 = tmp.substring( 0, pos );
+				
+				// Found last number
+				id = tmp.substring( pos + 1, tmp.length() );
+				
+				try
 				{
-					if( this.arg.charAt( c ) == '.' )
+					read[0] = Integer.parseInt( reseau );
+					read[1] = Integer.parseInt( mask );
+					read[2] = Integer.parseInt( mask2 );
+					read[3] = Integer.parseInt( id );
+				}
+				catch( NumberFormatException exception )
+				{
+					System.out.println( "Error: not good format for IP address, is not a number" );
+					System.exit( 1 );
+				}
+				
+				boolean isgood = true;
+				for( int value : read )
+				{
+					if( !(0 <= value && value <= 255) )
 					{
-						read[ count ] = Integer.parseInt( this.arg.substring( pos, pos2 ) );
-						pos = pos2 + 1;
+						System.out.println( "Error: not good format for IP address, " +
+								"number need to be smaller or equal than 255 and bigger or equal than zero"
+								+ " => '" + value + "'" );
+						isgood = false;
 					}
-					pos2++;
 				}
 				
 				//
-				this.exe.setCmdExe( "IpToNomMachine" );
-				this.exe.setArg( this.arg );
-				printRes( this.exe.execute() );
+				if( isgood )
+				{
+					this.exe.setCmdExe( "IpToNomMachine" );
+					this.exe.setArg( this.arg );
+					printRes( this.exe.execute() );
+				}
 			}
 			
 			// Maybe 'ls'
-			else if( tmp.equals( "ls" ) )
+			else if( this.arg.contains( "ls" ) )
 			{
-				String tmp2 = tmp.substring( 0, tmp.length() );
+				if( this.arg.contains( "-a" ) )
+				{
+					int pos = this.arg.indexOf( "a" );
+					String tmp = this.arg.substring( pos+2, this.arg.length() );
+					
+					this.exe.setCmdExe( "ls -a" );
+					this.exe.setArg( tmp );
+					printRes( this.exe.execute() );
+				}
 				
-				this.exe.setCmdExe( "ls" );
-				this.exe.setArg( this.arg );
-				printRes( this.exe.execute() );
+				else
+				{
+					int pos = this.arg.indexOf( "s" );
+					String tmp = this.arg.substring( pos+2, this.arg.length() );
+					
+					this.exe.setCmdExe( "ls" );
+					this.exe.setArg( tmp );
+					printRes( this.exe.execute() );
+				}
 			}
 			
 			// Maybe Exit
