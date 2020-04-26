@@ -7,12 +7,12 @@ Collection manipulation like Map, List, arrayList, LinkedList, ...
 ## Contains
  - dataFile.cfg => configuration file
  - README.md
- - src/DNS.java => with all functions
+ - src/.. => with all functions
 
 ## Compilation
 ```Bash
-javac DNS.java
-java DNS
+javac *.java
+java Main
 ```
 
 ## Usage
@@ -22,13 +22,13 @@ You can fill the configuration file with IP address and his machine name like :
 ```
 With ths config file, program finds for you information.
 After the
-```Jave
+```Java
 >
 ```
 You can type a ip address for know his machine name like :
 ```Java
 > 123.456.78.9 // Entry
-monServeur.chezMoi.fr // Output
+Answer : monServeur.chezMoi.fr // Output
 ```
 
 Or vise versa like :
