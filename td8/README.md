@@ -25,7 +25,7 @@ After the
 ```Jave
 >
 ```
-You can tape a ip address for know his machine name like :
+You can type a ip address for know his machine name like :
 ```Java
 > 123.456.78.9 // Entry
 monServeur.chezMoi.fr // Output
@@ -37,7 +37,7 @@ Or vise versa like :
 123.456.78.9 // Output
 ```
 
-You can tape :
+You can type :
 ```Java
 > ls 'domain'
 ```
@@ -49,7 +49,7 @@ Or :
 ```
 For know all ip address in this domain
 
-Fanally, you can tape :
+Fanally, you can type :
 ```Java
 > Exit
 ```
