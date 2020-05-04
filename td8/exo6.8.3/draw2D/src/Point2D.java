@@ -1,58 +1,59 @@
-import java.io.Serializable;
-
-public class Rectangle extends Figure implements Serializable
+public class Point2D extends Figure
 {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	private Point2D topLeft;
-	private Point2D downRight;
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-
-	public Rectangle( Point2D topLeft, Point2D downRight)
-	{
-		this.topLeft = topLeft;
-		this.downRight = downRight;
-	}
+	private double x;
+	private double y;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	/**
-	 * Getter : Get the point at the top left
-	 * @return top left point
+	 * Builder
+	 * @param x abscissa
+	 * @param y ordinate
 	 */
-	public Point2D getTopLeft()
+	public Point2D( double x, double y)
 	{
-		return topLeft;
+		this.x = x;
+		this.y = y;
+	}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	/**
+	 * Getter : get x
+	 * @return x
+	 */
+	public double getX()
+	{
+		return x;
 	}
 	
 	/**
-	 * Setter : Set the point at the top left
-	 * @param topLeft the new top left point
+	 * Stter: set x
+	 * @param x new abscissa
 	 */
-	public void setTopLeft( Point2D topLeft )
+	public void setX( double x )
 	{
-		this.topLeft = topLeft;
+		this.x = x;
 	}
 	
 	/**
-	 * Getter : Get the point at the down right
-	 * @return down right point
+	 * Getter : get y
+	 * @return y
 	 */
-	public Point2D getDownRight()
+	public double getY()
 	{
-		return downRight;
+		return y;
 	}
 	
 	/**
-	 * Setter : Set the point at the down right
-	 * @param downRight the new down right point
+	 * Stter : set y
+	 * @param y new ordinate
 	 */
-	public void setDownRight( Point2D downRight )
+	public void setY( double y )
 	{
-		this.downRight = downRight;
+		this.y = y;
 	}
-	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	/**
@@ -64,8 +65,8 @@ public class Rectangle extends Figure implements Serializable
 	@Override
 	public void move( double dx, double dy )
 	{
-		this.topLeft.move( dx, dy );
-		this.downRight.move( dx, dy );
+		this.x += dx;
+		this.y += dy;
 	}
 	
 	/**
@@ -76,17 +77,20 @@ public class Rectangle extends Figure implements Serializable
 	{
 		System.out.println( this.toString() );
 	}
-
+	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	/**
-	 * Create a string with rectangle information
+	 * Create a string with point information
 	 * @return string
 	 */
 	@Override
 	public String toString()
 	{
-		return "Rectangle : {top left "+this.topLeft.toString()+", down right "+this.downRight.toString()+"}";
+		return "Point2D : {" +
+				"x=" + x +
+				", y=" + y +
+				'}';
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
