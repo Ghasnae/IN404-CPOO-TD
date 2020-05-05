@@ -3,7 +3,7 @@ import java.time.LocalDate;
 public class Main {
 	public static void main( String[] args )
 	{
-		String file = "output_fig.txt";
+		String file = "output_fig.ser";
 		Figure[] tblFig = new Figure[ 5 ];
 		
 		tblFig[ 0 ] = new Rectangle( new Point2D( ( double ) 14.5, ( double ) 35.1 ), new Point2D( ( double ) 7, ( double ) 4.6 ) );
