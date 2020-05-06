@@ -6,6 +6,7 @@ Abstract class and serializable
 
 ## Contains
  - exo6.8.3/
+ - exo6.8.3/output_fig.ser
  - exo6.8.3/draw2D/
  - exo6.8.3/draw2D/.idea/
  - exo6.8.3/draw2D/out/production/draw2D/*.class
@@ -17,7 +18,6 @@ Abstract class and serializable
  - exo6.8.3/draw2D/Save.java
  - exo6.8.3/draw2D/Main.java
  - exo6.8.3/draw2D/README.md
- - exo6.8.3/output_fig.ser
  
  ## Compilation
  ```bash
