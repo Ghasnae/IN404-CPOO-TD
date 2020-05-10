@@ -1,15 +1,17 @@
 import java.io.Serializable;
 
-public class Rectangle extends Figure implements Serializable
-{
+public class Rectangle extends Figure implements Serializable {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	private Point2D topLeft;
 	private Point2D downRight;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-
-	public Rectangle( Point2D topLeft, Point2D downRight)
+	/**
+	 * @param topLeft
+	 * @param downRight
+	 */
+	public Rectangle( Point2D topLeft, Point2D downRight )
 	{
 		this.topLeft = topLeft;
 		this.downRight = downRight;
@@ -19,6 +21,7 @@ public class Rectangle extends Figure implements Serializable
 	
 	/**
 	 * Getter : Get the point at the top left
+	 *
 	 * @return top left point
 	 */
 	public Point2D getTopLeft()
@@ -28,6 +31,7 @@ public class Rectangle extends Figure implements Serializable
 	
 	/**
 	 * Setter : Set the point at the top left
+	 *
 	 * @param topLeft the new top left point
 	 */
 	public void setTopLeft( Point2D topLeft )
@@ -37,6 +41,7 @@ public class Rectangle extends Figure implements Serializable
 	
 	/**
 	 * Getter : Get the point at the down right
+	 *
 	 * @return down right point
 	 */
 	public Point2D getDownRight()
@@ -46,13 +51,14 @@ public class Rectangle extends Figure implements Serializable
 	
 	/**
 	 * Setter : Set the point at the down right
+	 *
 	 * @param downRight the new down right point
 	 */
 	public void setDownRight( Point2D downRight )
 	{
 		this.downRight = downRight;
 	}
-	
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	/**
@@ -81,12 +87,13 @@ public class Rectangle extends Figure implements Serializable
 	
 	/**
 	 * Create a string with rectangle information
+	 *
 	 * @return string
 	 */
 	@Override
 	public String toString()
 	{
-		return "Rectangle : {top left "+this.topLeft.toString()+", down right "+this.downRight.toString()+"}";
+		return "Rectangle : {top left " + this.topLeft.toString() + ", down right " + this.downRight.toString() + "}";
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

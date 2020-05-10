@@ -3,6 +3,7 @@ import java.time.LocalDate;
 public class Main {
 	public static void main( String[] args )
 	{
+		/*
 		String file = "../output_fig.ser";
 		Figure[] tblFig = new Figure[ 5 ];
 		
@@ -60,5 +61,9 @@ public class Main {
 		for( Figure fig : readFig3 )
 			System.out.println(fig.toString());
 		System.out.println("\n");
+		*/
+		
+		Menu menu = new Menu();
+		menu.run();
 	}
 }
