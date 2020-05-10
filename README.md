@@ -10,9 +10,10 @@ You can find here all the tds I have done
 - td4 => Heritage and polymorphism
 - td5 => Module and library
 - td6 => Errors and exceptions managment
+- td8 => Collection managment
 
 # Author
 m27bay
 
 ## Last Update
-04/15/2020
+08/05/2020
