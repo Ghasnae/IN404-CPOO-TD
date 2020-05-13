@@ -29,7 +29,7 @@ public class Point2D extends Figure
 	}
 	
 	/**
-	 * Stter: set x
+	 * Setter: set x
 	 * @param x new abscissa
 	 */
 	public void setX( double x )
@@ -47,13 +47,14 @@ public class Point2D extends Figure
 	}
 	
 	/**
-	 * Stter : set y
+	 * Setter : set y
 	 * @param y new ordinate
 	 */
 	public void setY( double y )
 	{
 		this.y = y;
 	}
+	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	/**

@@ -1,12 +1,17 @@
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Menu {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	private final String[] figureTbl;
+	private final String[] commandTbl;
+	
 	private Figure[] fig;
 	private int nextPlace;
 	private int numFigMax;
+	
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -15,6 +20,9 @@ public class Menu {
 	 */
 	public Menu()
 	{
+		this.figureTbl = new String[]{ "triangle", "rectangle", "circle" };
+		this.commandTbl = new String[]{ "man", "quit", "create", "move", "view" };
+		
 		this.numFigMax = 10;
 		this.nextPlace = 0;
 		this.fig = new Figure[ this.numFigMax ];
@@ -98,21 +106,33 @@ public class Menu {
 		double x, y;
 		
 		printf( "coordinates in x : \n > " );
-		if( sc.hasNextDouble() )
-			x = sc.nextDouble();
-		else
+		try
 		{
+			x = sc.nextDouble();
+		}
+		catch( InputMismatchException e )
+		{
+			// e.getMessage();
+			
 			printf( "ERROR : the entry is not a double.\n" );
 			Random r = new Random();
 			x = 100 * r.nextDouble();
 			printf( "Default value x = " + x + ".\n" );
 		}
 		
+		// Reset
+		sc = null;
+		sc = new Scanner( System.in );
+		
 		printf( "coordinates in y : \n > " );
-		if( sc.hasNextDouble() )
-			y = sc.nextDouble();
-		else
+		try
 		{
+			y = sc.nextDouble();
+		}
+		catch( InputMismatchException e )
+		{
+			// e.getMessage();
+			
 			printf( "ERROR : the entry is not a double.\n" );
 			Random r = new Random();
 			y = 100 * r.nextDouble();
@@ -125,10 +145,8 @@ public class Menu {
 	private Point2D[] initPointFigure( int numberPoints )
 	{
 		Point2D[] points = new Point2D[ numberPoints ];
-		for( Point2D point : points )
-		{
-			point = askPoint();
-		}
+		for( int i = 0 ; i < numberPoints ; i++)
+			points[i] = askPoint();
 		
 		return points;
 	}
@@ -142,13 +160,13 @@ public class Menu {
 		}
 		else
 		{
-			if( nameFigure.equals( "triangle" ) )
+			if( nameFigure.equals( this.figureTbl[0] ) )
 				return initPointFigure( 3 );
 			
-			else if( nameFigure.equals( "rectangle" ) )
+			else if( nameFigure.equals( this.figureTbl[1] ) )
 				return initPointFigure( 2 );
 			
-			else if( nameFigure.equals( "circle" ) )
+			else if( nameFigure.equals( this.figureTbl[2] ) )
 				return initPointFigure( 1 );
 		}
 		
@@ -162,45 +180,46 @@ public class Menu {
 		if( sc.hasNextLine() )
 		{
 			String fig = sc.nextLine();
-			if( fig.equals( "triangle" ) )
+			if( fig.equals( this.figureTbl[0] ) )
 			{
-				Point2D[] points = initPoint( "triangle" );
-				if( points != null )
-					return new Triangle( points[ 0 ], points[ 1 ], points[ 2 ] );
-				else
-					return null;
+				Point2D[] points = initPoint( this.figureTbl[0] );
+				
+				assert points != null;
+				return new Triangle( points[ 0 ], points[ 1 ], points[ 2 ] );
 			}
 			
-			else if( fig.equals( "rectangle" ) )
+			else if( fig.equals( this.figureTbl[1] ) )
 			{
-				Point2D[] points = initPoint( "Rectangle" );
-				if( points != null )
-					return new Rectangle( points[ 0 ], points[ 1 ] );
-				else
-					return null;
+				Point2D[] points = initPoint( this.figureTbl[1] );
+				
+				assert points != null;
+				return new Rectangle( points[ 0 ], points[ 1 ] );
 			}
 			
-			else if( fig.equals( "circle" ) )
+			else if( fig.equals( this.figureTbl[2] ) )
 			{
 				double radius;
 				Scanner sc2 = new Scanner( System.in );
 				printf( "Give me the radius (in the format xxx,xxx and a virgule not a point) ?\n > " );
-				if( sc2.hasNextDouble() )
-					radius = sc.nextDouble();
-				else
+				
+				try
 				{
+					radius = sc.nextDouble();
+				}
+				catch( InputMismatchException e )
+				{
+					// e.getMessage();
+					
 					printf( "ERROR : the entry is not a double.\n" );
 					Random r = new Random();
 					radius = 50 * r.nextDouble();
 					printf( "Default value radius = " + radius + ".\n" );
 				}
 				
-				Point2D[] points = initPoint( "Circle" );
-				printf( "est ce que points est null ? "+(points == null)+".\n" );
-				if( points != null )
-					return new Circle( points[ 0 ], radius );
-				else
-					return null;
+				Point2D[] points = initPoint( this.figureTbl[2] );
+				
+				assert points != null;
+				return new Circle( points[ 0 ], radius );
 			}
 			
 			else
@@ -224,15 +243,14 @@ public class Menu {
 		printf( "'create' : for create a new figure.\n" );
 		printf( "'move' : for move figure.\n" );
 		printf( "'quit' or 'q' : for leave the program.\n" );
-		printf( "'view' : for view all figure.\n" );
-		printf( "\n" );
+		printf( "'view' : for view all figure.\n\n" );
 	}
 	
 	private void create()
 	{
 		if( this.nextPlace < this.numFigMax )
 		{
-			this.fig[ this.nextPlace ] =  whatFigure();
+			this.fig[ this.nextPlace ] = whatFigure();
 			this.nextPlace += 1;
 		}
 		else
@@ -242,7 +260,7 @@ public class Menu {
 	
 	private void move()
 	{
-		printf( "\n" );
+		printf( "move\n" );
 	}
 	
 	private void view()
@@ -253,8 +271,6 @@ public class Menu {
 			{
 				if( figure != null )
 					figure.print();
-				else
-					printf( "figure not define yet.\n" );
 			}
 		}
 		else
@@ -282,15 +298,15 @@ public class Menu {
 		if( sc.hasNextLine() )
 		{
 			choice = sc.nextLine();
-			if( choice.equals( "man" ) )
+			if( choice.equals( this.commandTbl[0] ) )
 				man();
-			else if( choice.equals( "create" ) )
+			else if( choice.equals( this.commandTbl[2] ) )
 				create();
-			else if( choice.equals( "move" ) )
+			else if( choice.equals( this.commandTbl[3] ) )
 				move();
-			else if( choice.equals( "view" ) )
+			else if( choice.equals( this.commandTbl[4] ) )
 				view();
-			else if( choice.equals( "quit" ) || choice.equals( "q" ) )
+			else if( choice.equals( this.commandTbl[1] ) || choice.equals( "q" ) )
 			{
 				quit();
 				leave = true;

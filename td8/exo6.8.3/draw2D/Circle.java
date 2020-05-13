@@ -1,8 +1,7 @@
 import java.io.Serializable;
 
-public class Circle extends Figure  implements Serializable
-{
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+public class Circle extends Figure implements Serializable {
+	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	private Point2D center;
 	private double radius;
 
@@ -73,7 +72,7 @@ public class Circle extends Figure  implements Serializable
 	@Override
 	public void move( double dx, double dy )
 	{
-	 this.center.move( dx, dy );
+		this.center.move( dx, dy );
 	}
 	
 	/**
@@ -82,7 +81,7 @@ public class Circle extends Figure  implements Serializable
 	@Override
 	public void print()
 	{
-		System.out.println(this.toString());
+		System.out.println( this.toString() );
 	}
 	
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
