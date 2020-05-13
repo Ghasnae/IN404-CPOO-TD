@@ -93,7 +93,7 @@ public class Rectangle extends Figure implements Serializable {
 	@Override
 	public String toString()
 	{
-		return "Rectangle : {top left " + this.topLeft.toString() + ", down right " + this.downRight.toString() + "}";
+		return "Rectangle : {"+this.topLeft.toString() + ",  " + this.downRight.toString() + "}";
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

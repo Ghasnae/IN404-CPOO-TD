@@ -21,7 +21,7 @@ public class Menu {
 	public Menu()
 	{
 		this.figureTbl = new String[]{ "triangle", "rectangle", "circle" };
-		this.commandTbl = new String[]{ "man", "quit", "create", "move", "view" };
+		this.commandTbl = new String[]{ "man", "quit", "create", "move", "view", "clear" };
 		
 		this.numFigMax = 10;
 		this.nextPlace = 0;
@@ -97,6 +97,11 @@ public class Menu {
 	{
 		System.exit( status );
 	}
+	
+	private void back()
+	{
+		printf( "Back to the principal menu.\n\n");
+	}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -142,6 +147,52 @@ public class Menu {
 		return new Point2D( x, y );
 	}
 	
+	private double[] askMove()
+	{
+		Scanner sc = new Scanner( System.in );
+		double x, y;
+		
+		printf( "move in x : \n > " );
+		try
+		{
+			x = sc.nextDouble();
+		}
+		catch( InputMismatchException e )
+		{
+			// e.getMessage();
+			
+			printf( "ERROR : the entry is not a double.\n" );
+			Random r = new Random();
+			x = 100 * r.nextDouble();
+			printf( "Default value x = " + x + ".\n" );
+		}
+		
+		// Reset
+		sc = null;
+		sc = new Scanner( System.in );
+		
+		printf( "move in y : \n > " );
+		try
+		{
+			y = sc.nextDouble();
+		}
+		catch( InputMismatchException e )
+		{
+			// e.getMessage();
+			
+			printf( "ERROR : the entry is not a double.\n" );
+			Random r = new Random();
+			y = 100 * r.nextDouble();
+			printf( "Default value y = " + y + ".\n" );
+		}
+		
+		double[] move = new double[2];
+		move[0] = x;
+		move[1] = y;
+		
+		return move;
+	}
+	
 	private Point2D[] initPointFigure( int numberPoints )
 	{
 		Point2D[] points = new Point2D[ numberPoints ];
@@ -175,7 +226,7 @@ public class Menu {
 	
 	private Figure whatFigure()
 	{
-		printf( "What figure do you want to create ?\n > " );
+		printf( "What figure do you want to create ?( triangle, rectangle, circle )\n > " );
 		Scanner sc = new Scanner( System.in );
 		if( sc.hasNextLine() )
 		{
@@ -185,6 +236,7 @@ public class Menu {
 				Point2D[] points = initPoint( this.figureTbl[0] );
 				
 				assert points != null;
+				back();
 				return new Triangle( points[ 0 ], points[ 1 ], points[ 2 ] );
 			}
 			
@@ -193,6 +245,7 @@ public class Menu {
 				Point2D[] points = initPoint( this.figureTbl[1] );
 				
 				assert points != null;
+				back();
 				return new Rectangle( points[ 0 ], points[ 1 ] );
 			}
 			
@@ -219,18 +272,21 @@ public class Menu {
 				Point2D[] points = initPoint( this.figureTbl[2] );
 				
 				assert points != null;
+				back();
 				return new Circle( points[ 0 ], radius );
 			}
 			
 			else
 			{
-				printf( "Unknown figure.\nBack to the principal menu.\n" );
+				printf( "Unknown figure.\n");
+				back();
 				return null;
 			}
 		}
 		else
 		{
 			printf( "ERROR : the entry is not a String.\n" );
+			back();
 			return null;
 		}
 	}
@@ -242,6 +298,7 @@ public class Menu {
 		printf( "man :\n" );
 		printf( "'create' : for create a new figure.\n" );
 		printf( "'move' : for move figure.\n" );
+		printf( "'clear' : for remove all figure.\n" );
 		printf( "'quit' or 'q' : for leave the program.\n" );
 		printf( "'view' : for view all figure.\n\n" );
 	}
@@ -251,32 +308,113 @@ public class Menu {
 		if( this.nextPlace < this.numFigMax )
 		{
 			this.fig[ this.nextPlace ] = whatFigure();
-			this.nextPlace += 1;
+			
+			if( this.fig[ this.nextPlace ] != null )
+				this.nextPlace += 1;
 		}
 		else
+		{
 			printf( "ERROR : maximum number figure is reached.\n" );
-		printf( "\n" );
+			back();
+		}
 	}
 	
 	private void move()
 	{
-		printf( "move\n" );
-	}
-	
-	private void view()
-	{
-		if( this.fig != null )
+		if( this.nextPlace == 0 )
 		{
-			for( Figure figure : this.fig )
-			{
-				if( figure != null )
-					figure.print();
-			}
+			printf( "You can't move, there is no figure to move.\n" );
+			back();
 		}
 		else
-			printf( "figure table not define yet.\n" );
-		
-		printf( "Number of elements : " + this.nextPlace + " / " + this.numFigMax + ".\n\n" );
+		{
+			printf( "view : \n" );
+			view( false );
+			
+			Scanner sc = new Scanner( System.in );
+			int numberFigure;
+			printf( "Which Figure do you want to move ? ( Give me her number ).\n > " );
+			try
+			{
+				numberFigure = sc.nextInt();
+			}
+			catch( InputMismatchException e )
+			{
+				// e.getMessage();
+				
+				printf( "ERROR : the entry in not an int.\n" );
+				back();
+				return;
+			}
+			
+			if( 0 <= numberFigure && numberFigure < this.nextPlace )
+			{
+				if( this.fig[ numberFigure ] != null )
+				{
+					double[] move = askMove();
+					this.fig[ numberFigure ].move( move[0], move[1] );
+					back();
+				}
+				else
+				{
+					printf( "ERROR : figure null.\n" );
+					back();
+				}
+			}
+			else
+			{
+				printf( "ERROR : wrong figure number.\n" );
+				back();
+			}
+			
+		}
+	}
+	
+	private void clear()
+	{
+		if( this.nextPlace == 0 )
+		{
+			printf( "All is already clear.\n" );
+			back();
+		}
+		else
+		{
+			for( int numFigure = 0 ; numFigure < this.nextPlace ; numFigure++ )
+				this.fig[ numFigure ] = null;
+			back();
+		}
+		this.nextPlace = 0;
+	}
+	
+	private void view( boolean backMode )
+	{
+		if( this.nextPlace == 0 )
+		{
+			printf( "There is no figure draw yet.\n" );
+			if( backMode )
+				back();
+			else
+				printf( "\n" );
+		}
+		else
+		{
+			if( this.fig != null )
+			{
+				for( int numFigure = 0 ; numFigure < this.nextPlace ; numFigure++ )
+				{
+					printf( "number : " + numFigure + "  " );
+					this.fig[ numFigure ].print();
+				}
+			}
+			else
+				printf( "figure table not define yet.\n" );
+			
+			printf( "Number of elements : " + this.nextPlace + " / " + this.numFigMax + ".\n\n" );
+			if( backMode )
+				back();
+			else
+				printf( "\n" );
+		}
 	}
 	
 	private void quit()
@@ -305,7 +443,9 @@ public class Menu {
 			else if( choice.equals( this.commandTbl[3] ) )
 				move();
 			else if( choice.equals( this.commandTbl[4] ) )
-				view();
+				view( true );
+			else if( choice.equals( this.commandTbl[5] ) )
+				clear();
 			else if( choice.equals( this.commandTbl[1] ) || choice.equals( "q" ) )
 			{
 				quit();

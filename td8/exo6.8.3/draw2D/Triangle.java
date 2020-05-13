@@ -114,7 +114,7 @@ public class Triangle extends Figure implements Serializable {
 	@Override
 	public String toString()
 	{
-		return "Triangle : {top " + this.top.toString() + ", down right " + this.downRight.toString() + ", down left " + this.downLeft.toString() + "}";
+		return "Triangle : {" + this.top.toString() + ", " + this.downRight.toString() + ", " + this.downLeft.toString() + "}";
 	}
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
