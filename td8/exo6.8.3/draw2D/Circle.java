@@ -1,9 +1,10 @@
 import java.io.Serializable;
 
 public class Circle extends Figure implements Serializable {
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	private Point2D center;
-	private double radius;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	private final Point2D center;
+	private final double radius;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -16,48 +17,6 @@ public class Circle extends Figure implements Serializable {
 	public Circle( Point2D center, double radius )
 	{
 		this.center = center;
-		this.radius = radius;
-	}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	/**
-	 * Getter : get the center
-	 *
-	 * @return the center
-	 */
-	public Point2D getCenter()
-	{
-		return center;
-	}
-	
-	/**
-	 * Setter : set the center
-	 *
-	 * @param center the new center
-	 */
-	public void setCenter( Point2D center )
-	{
-		this.center = center;
-	}
-	
-	/**
-	 * Getter : get the radius
-	 *
-	 * @return the radius
-	 */
-	public double getRadius()
-	{
-		return radius;
-	}
-	
-	/**
-	 * Setter : set the radius
-	 *
-	 * @param radius the new radius
-	 */
-	public void setRadius( double radius )
-	{
 		this.radius = radius;
 	}
 

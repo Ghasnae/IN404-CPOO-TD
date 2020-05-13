@@ -11,7 +11,7 @@ public class Menu {
 	private Figure[] fig;
 	private int nextPlace;
 	private int numFigMax;
-	
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
@@ -31,85 +31,36 @@ public class Menu {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	/**
-	 * Getter : get the figure table
+	 * Rename print
 	 *
-	 * @return the figure table
+	 * @param msg the msg to print
 	 */
-	public Figure[] getFig()
-	{
-		return fig;
-	}
-	
-	/**
-	 * Setter : set the new figure table
-	 *
-	 * @param fig the new table figure
-	 */
-	public void setFig( Figure[] fig )
-	{
-		this.fig = fig;
-	}
-	
-	/**
-	 * Getter : get the maximum figure number
-	 *
-	 * @return numFigMax
-	 */
-	public int getNumFigMax()
-	{
-		return numFigMax;
-	}
-	
-	/**
-	 * Setter : set the maximum figure number
-	 *
-	 * @param numFigMax new maximum figure number
-	 */
-	public void setNumFigMax( int numFigMax )
-	{
-		this.numFigMax = numFigMax;
-	}
-	
-	/**
-	 * @return
-	 */
-	public int getNextPlace()
-	{
-		return nextPlace;
-	}
-	
-	/**
-	 * @param nextPlace
-	 */
-	public void setNextPlace( int nextPlace )
-	{
-		this.nextPlace = nextPlace;
-	}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
 	private void printf( String msg )
 	{
 		System.out.print( msg );
 	}
 	
-	private void exit( int status )
-	{
-		System.exit( status );
-	}
-	
+	/**
+	 * Print
+	 */
 	private void back()
 	{
-		printf( "Back to the principal menu.\n\n");
+		printf( "Back to the principal menu.\n\n" );
 	}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	/**
+	 * Ask points to the user points.
+	 *
+	 * @return Point with coordinates in x et y.
+	 */
 	private Point2D askPoint()
 	{
 		Scanner sc = new Scanner( System.in );
 		double x, y;
 		
+		// Ask coordinates in c
 		printf( "coordinates in x : \n > " );
 		try
 		{
@@ -117,8 +68,6 @@ public class Menu {
 		}
 		catch( InputMismatchException e )
 		{
-			// e.getMessage();
-			
 			printf( "ERROR : the entry is not a double.\n" );
 			Random r = new Random();
 			x = 100 * r.nextDouble();
@@ -129,6 +78,7 @@ public class Menu {
 		sc = null;
 		sc = new Scanner( System.in );
 		
+		// Ask coordinates in y
 		printf( "coordinates in y : \n > " );
 		try
 		{
@@ -136,22 +86,27 @@ public class Menu {
 		}
 		catch( InputMismatchException e )
 		{
-			// e.getMessage();
-			
 			printf( "ERROR : the entry is not a double.\n" );
 			Random r = new Random();
 			y = 100 * r.nextDouble();
 			printf( "Default value y = " + y + ".\n" );
 		}
 		
+		// Create points
 		return new Point2D( x, y );
 	}
 	
+	/**
+	 * ask move to the user
+	 *
+	 * @return coordinates for move
+	 */
 	private double[] askMove()
 	{
 		Scanner sc = new Scanner( System.in );
 		double x, y;
 		
+		// Ask move in x
 		printf( "move in x : \n > " );
 		try
 		{
@@ -159,8 +114,6 @@ public class Menu {
 		}
 		catch( InputMismatchException e )
 		{
-			// e.getMessage();
-			
 			printf( "ERROR : the entry is not a double.\n" );
 			Random r = new Random();
 			x = 100 * r.nextDouble();
@@ -171,6 +124,7 @@ public class Menu {
 		sc = null;
 		sc = new Scanner( System.in );
 		
+		// Ask move in y
 		printf( "move in y : \n > " );
 		try
 		{
@@ -178,30 +132,42 @@ public class Menu {
 		}
 		catch( InputMismatchException e )
 		{
-			// e.getMessage();
-			
 			printf( "ERROR : the entry is not a double.\n" );
 			Random r = new Random();
 			y = 100 * r.nextDouble();
 			printf( "Default value y = " + y + ".\n" );
 		}
 		
-		double[] move = new double[2];
-		move[0] = x;
-		move[1] = y;
+		double[] move = new double[ 2 ];
+		move[ 0 ] = x;
+		move[ 1 ] = y;
 		
 		return move;
 	}
 	
+	/**
+	 * Init all points for the user
+	 *
+	 * @param numberPoints the number of points
+	 *
+	 * @return Points[] with points
+	 */
 	private Point2D[] initPointFigure( int numberPoints )
 	{
 		Point2D[] points = new Point2D[ numberPoints ];
-		for( int i = 0 ; i < numberPoints ; i++)
-			points[i] = askPoint();
+		for( int i = 0 ; i < numberPoints ; i++ )
+			points[ i ] = askPoint();
 		
 		return points;
 	}
 	
+	/**
+	 * Init figure
+	 *
+	 * @param nameFigure name figure
+	 *
+	 * @return Points[]
+	 */
 	private Point2D[] initPoint( String nameFigure )
 	{
 		if( nameFigure == null )
@@ -211,45 +177,53 @@ public class Menu {
 		}
 		else
 		{
-			if( nameFigure.equals( this.figureTbl[0] ) )
+			if( nameFigure.equals( this.figureTbl[ 0 ] ) )
 				return initPointFigure( 3 );
 			
-			else if( nameFigure.equals( this.figureTbl[1] ) )
+			else if( nameFigure.equals( this.figureTbl[ 1 ] ) )
 				return initPointFigure( 2 );
 			
-			else if( nameFigure.equals( this.figureTbl[2] ) )
+			else if( nameFigure.equals( this.figureTbl[ 2 ] ) )
 				return initPointFigure( 1 );
 		}
 		
 		return null;
 	}
 	
+	/**
+	 * Found the figure
+	 *
+	 * @return the figure
+	 */
 	private Figure whatFigure()
 	{
 		printf( "What figure do you want to create ?( triangle, rectangle, circle )\n > " );
 		Scanner sc = new Scanner( System.in );
 		if( sc.hasNextLine() )
 		{
+			// Triangle
 			String fig = sc.nextLine();
-			if( fig.equals( this.figureTbl[0] ) )
+			if( fig.equals( this.figureTbl[ 0 ] ) )
 			{
-				Point2D[] points = initPoint( this.figureTbl[0] );
+				Point2D[] points = initPoint( this.figureTbl[ 0 ] );
 				
 				assert points != null;
 				back();
 				return new Triangle( points[ 0 ], points[ 1 ], points[ 2 ] );
 			}
 			
-			else if( fig.equals( this.figureTbl[1] ) )
+			// Rectangle
+			else if( fig.equals( this.figureTbl[ 1 ] ) )
 			{
-				Point2D[] points = initPoint( this.figureTbl[1] );
+				Point2D[] points = initPoint( this.figureTbl[ 1 ] );
 				
 				assert points != null;
 				back();
 				return new Rectangle( points[ 0 ], points[ 1 ] );
 			}
 			
-			else if( fig.equals( this.figureTbl[2] ) )
+			// Circle
+			else if( fig.equals( this.figureTbl[ 2 ] ) )
 			{
 				double radius;
 				Scanner sc2 = new Scanner( System.in );
@@ -261,15 +235,13 @@ public class Menu {
 				}
 				catch( InputMismatchException e )
 				{
-					// e.getMessage();
-					
 					printf( "ERROR : the entry is not a double.\n" );
 					Random r = new Random();
 					radius = 50 * r.nextDouble();
 					printf( "Default value radius = " + radius + ".\n" );
 				}
 				
-				Point2D[] points = initPoint( this.figureTbl[2] );
+				Point2D[] points = initPoint( this.figureTbl[ 2 ] );
 				
 				assert points != null;
 				back();
@@ -278,7 +250,7 @@ public class Menu {
 			
 			else
 			{
-				printf( "Unknown figure.\n");
+				printf( "Unknown figure.\n" );
 				back();
 				return null;
 			}
@@ -293,6 +265,9 @@ public class Menu {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	/**
+	 * Print man
+	 */
 	private void man()
 	{
 		printf( "man :\n" );
@@ -303,6 +278,9 @@ public class Menu {
 		printf( "'view' : for view all figure.\n\n" );
 	}
 	
+	/**
+	 * Create and add figure
+	 */
 	private void create()
 	{
 		if( this.nextPlace < this.numFigMax )
@@ -319,6 +297,9 @@ public class Menu {
 		}
 	}
 	
+	/**
+	 * Move Figure
+	 */
 	private void move()
 	{
 		if( this.nextPlace == 0 )
@@ -352,7 +333,7 @@ public class Menu {
 				if( this.fig[ numberFigure ] != null )
 				{
 					double[] move = askMove();
-					this.fig[ numberFigure ].move( move[0], move[1] );
+					this.fig[ numberFigure ].move( move[ 0 ], move[ 1 ] );
 					back();
 				}
 				else
@@ -370,6 +351,9 @@ public class Menu {
 		}
 	}
 	
+	/**
+	 * Clear all
+	 */
 	private void clear()
 	{
 		if( this.nextPlace == 0 )
@@ -386,6 +370,11 @@ public class Menu {
 		this.nextPlace = 0;
 	}
 	
+	/**
+	 * print figure
+	 *
+	 * @param backMode for print 'back'
+	 */
 	private void view( boolean backMode )
 	{
 		if( this.nextPlace == 0 )
@@ -417,6 +406,9 @@ public class Menu {
 		}
 	}
 	
+	/**
+	 * Quit program
+	 */
 	private void quit()
 	{
 		printf( "Exit in process..." );
@@ -424,29 +416,32 @@ public class Menu {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	/**
+	 * the principal menu
+	 *
+	 * @return exit or not
+	 */
 	private boolean menu()
 	{
-		//
 		boolean leave = false;
 		Scanner sc = new Scanner( System.in );
 		String choice = null;
 		
-		//
 		printf( "You can write 'man' for see the manual.\nWhat is your choice ?\n > " );
 		if( sc.hasNextLine() )
 		{
 			choice = sc.nextLine();
-			if( choice.equals( this.commandTbl[0] ) )
+			if( choice.equals( this.commandTbl[ 0 ] ) )
 				man();
-			else if( choice.equals( this.commandTbl[2] ) )
+			else if( choice.equals( this.commandTbl[ 2 ] ) )
 				create();
-			else if( choice.equals( this.commandTbl[3] ) )
+			else if( choice.equals( this.commandTbl[ 3 ] ) )
 				move();
-			else if( choice.equals( this.commandTbl[4] ) )
+			else if( choice.equals( this.commandTbl[ 4 ] ) )
 				view( true );
-			else if( choice.equals( this.commandTbl[5] ) )
+			else if( choice.equals( this.commandTbl[ 5 ] ) )
 				clear();
-			else if( choice.equals( this.commandTbl[1] ) || choice.equals( "q" ) )
+			else if( choice.equals( this.commandTbl[ 1 ] ) || choice.equals( "q" ) )
 			{
 				quit();
 				leave = true;
@@ -460,6 +455,9 @@ public class Menu {
 		return leave;
 	}
 	
+	/**
+	 * Run
+	 */
 	public void run()
 	{
 		boolean quit = false;

@@ -2,14 +2,19 @@ import java.io.PipedOutputStream;
 import java.io.Serializable;
 
 public class Triangle extends Figure implements Serializable {
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	private Point2D top;
-	private Point2D downRight;
-	private Point2D downLeft;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	private final Point2D top;
+	private final Point2D downRight;
+	private final Point2D downLeft;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	
+	/**
+	 * @param topLeft top left point
+	 * @param downRight down right point
+	 * @param downLeft down left point
+	 */
 	public Triangle( Point2D topLeft, Point2D downRight, Point2D downLeft )
 	{
 		this.top = topLeft;
@@ -18,68 +23,6 @@ public class Triangle extends Figure implements Serializable {
 	}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	/**
-	 * Getter : Get the point at the top left
-	 *
-	 * @return top left point
-	 */
-	public Point2D getTop()
-	{
-		return top;
-	}
-	
-	/**
-	 * Setter : Set the point at the top left
-	 *
-	 * @param top the new top left point
-	 */
-	public void setTop( Point2D top )
-	{
-		this.top = top;
-	}
-	
-	/**
-	 * Getter : Get the point at the down right
-	 *
-	 * @return down right point
-	 */
-	public Point2D getDownRight()
-	{
-		return downRight;
-	}
-	
-	/**
-	 * Setter : Set the point at the down right
-	 *
-	 * @param downRight the new down right point
-	 */
-	public void setDownRight( Point2D downRight )
-	{
-		this.downRight = downRight;
-	}
-	
-	/**
-	 * Getter : Get the point at the down left
-	 *
-	 * @return the down left
-	 */
-	public Point2D getDownLeft()
-	{
-		return downLeft;
-	}
-	
-	/**
-	 * Setter : Set the point at the down left
-	 *
-	 * @param downLeft the new down left
-	 */
-	public void setDownLeft( Point2D downLeft )
-	{
-		this.downLeft = downLeft;
-	}
-	
-	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	/**
 	 * Change abscissa and ordinate
