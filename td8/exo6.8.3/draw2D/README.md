@@ -16,6 +16,7 @@ Abstract class and serializable
  - exo6.8.3/draw2D/Rectangle.java
  - exo6.8.3/draw2D/Triangle.java
  - exo6.8.3/draw2D/Save.java
+ - exo6.8.3/draw2D/Menu.java
  - exo6.8.3/draw2D/Main.java
  - exo6.8.3/draw2D/README.md
  
@@ -26,7 +27,7 @@ java Main
 ```
 
 ## Usage
-You can read in the 'Main.java' all tests I have done.
+
 
 # Author
 Mickael LE DENMAT
