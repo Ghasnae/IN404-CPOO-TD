@@ -27,7 +27,22 @@ java Main
 ```
 
 ## Usage
-
+When you run se software, he appaer like this : 
+```bash
+You can write 'man' for see the manual.
+What is your choice ?
+ > 
+ ```
+ 
+ For beginning you can write 'man' for read the manual, and you can read this :
+ ```bash
+ man :
+'create' : for create a new figure.
+'move' : for move figure.
+'clear' : for remove all figure.
+'quit' or 'q' : for leave the program.
+'view' : for view all figure.
+```
 
 # Author
 Mickael LE DENMAT
@@ -35,4 +50,4 @@ Mickael LE DENMAT
 21804355
 
 ## Last Update
-05/05/2020
+14/05/2020
